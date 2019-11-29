@@ -1,3 +1,4 @@
-FROM rocker/tidyverse
+FROM rocker/tidyverse:latest
 
-RUN install2.r caret car dplyr ggplot2
+# install r dependencies
+RUN R -e "install.packages(c('caret', 'e1071'))"
