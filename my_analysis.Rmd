@@ -1,0 +1,66 @@
+---
+title: "My analysis"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# 0. load dependencies 
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+#install.packages('caret')
+#install.packages('e1071')
+library(caret)
+library(e1071)
+data(iris)
+```
+
+# 1. read data
+```{r}
+set.seed(1234)
+testing_idx <- createDataPartition(iris$Species, p=0.80, list=FALSE)
+validation <- iris[-testing_idx,]
+training <- iris[testing_idx,]
+```
+
+# 2. EDA
+```{r}
+dim(iris)
+summary(iris)
+x <- iris[,1:4]
+y <- iris[,5]
+par(mfrow=c(1,4))
+  for(i in 1:4) {
+  boxplot(x[,i], main=names(iris)[i])
+  }
+par(mfrow=c(1,1))
+plot(y)
+```
+
+# 3. modeling
+## 3.1 modeling
+```{r}
+control <- trainControl(method="cv", number=10)
+metric <- "Accuracy"
+set.seed(1234)
+fit.cart <- train(Species~., data=training, method="rpart", metric=metric, trControl=control)
+set.seed(1234)
+fit.knn <- train(Species~., data=training, method="knn", metric=metric, trControl=control)
+```
+
+## 3.2 evaluate model
+```{r}
+results <- resamples(list( cart=fit.cart, knn=fit.knn))
+dotplot(results)
+```
+
+## 3.3 predict
+```{r}
+predictions <- predict(fit.knn, validation)
+confusionMatrix(predictions, validation$Species)
+```
+
+```{r}
+sessionInfo()
+```
+
+reference: https://machinelearningmastery.com/machine-learning-in-r-step-by-step/

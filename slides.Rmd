@@ -1,0 +1,20 @@
+---
+title: "Docker for Reproducibility"
+author: "Kristin Chen"
+date: "11/29/2019"
+output: powerpoint_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Demo
+- `docker run -d -p 8787:8787 -v cd:/home/rstudio/working -e PASSWORD=demo -e ROOT=TRUE rocker/tidyverse`
+- `docker ps`
+- `docker commit -m "caret+e1071" container_id new_image_nme`
+- `docker images`
+- `docker stop container_id`
+- `docker run -d -p 8787:8787 -v cd:/home/rstudio/working -e PASSWORD=demo -e ROOT=TRUE new_image_nme`
+
+

@@ -1,4 +1,3 @@
-FROM rocker/tidyverse:3.4.3
+FROM rocker/tidyverse
 
-ENV DEBIAN_FRONTED noninteractive
-RUN install2.r lme4 car
+RUN install2.r caret car dplyr ggplot2
