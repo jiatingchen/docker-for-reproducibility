@@ -11,10 +11,23 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Demo
 - `docker run -d -p 8787:8787 -v cd:/home/rstudio/working -e PASSWORD=demo -e ROOT=TRUE rocker/tidyverse`
+
+## while computing
 - `docker ps`
 - `docker commit -m "caret+e1071" container_id new_image_nme`
 - `docker images`
 - `docker stop container_id`
 - `docker run -d -p 8787:8787 -v cd:/home/rstudio/working -e PASSWORD=demo -e ROOT=TRUE new_image_nme`
+- docker build new_image_nme #rebuild image
+
+# share with other
+- `copy NUL Dockerfile`
+- `FROM rocker/tidyverse:latest`
+- `RUN R -e "install.packages(c('caret', 'e1071'))"
+- `docker build -t dockerfile-demo .`
+- `docker run -d -v -e PASSWORD=demo dockerfile-demo`
+
+# what if you just wanna view the analysis report
+
 
 
