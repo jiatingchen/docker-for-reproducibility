@@ -11,7 +11,7 @@ RUN R -e "install.packages(c('remotes', 'rmarkdown')); \
   remotes::install_version('e1071', '1.7-3')"
 
 # copy my_analysis.Rmd from local PC to container
-COPY my_analysis.Rmd /root/working
+ADD my_analysis.Rmd /root/working
 
 # render my_analysis.Rmd and move my_analysis.html to outputs folder
 CMD cd /root/working \
