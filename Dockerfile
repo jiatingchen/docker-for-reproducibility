@@ -16,4 +16,4 @@ ADD my_analysis.Rmd /root/working
 # render my_analysis.Rmd and move my_analysis.html to outputs folder
 CMD cd /root/working \
     && R -e "rmarkdown::render('my_analysis.Rmd')" \
-&& mv /root/working/my_analysis.html /root/outputs
+&& mv /root/working/my_analysis.html /root/outputs/
